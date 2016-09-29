@@ -175,7 +175,7 @@ spec:
         - containerPort: 80
 ```
 
-This file sums up step 1-2, when created it will launched a 3 instances of _nginx:1.10_
+This file sums up step 1-2, when created it will launch 3 instances of _nginx:1.10_
 `sudo kubectl create -f nginx-old.yml`
 
 let's verify all the containers are there :
@@ -185,7 +185,7 @@ let's verify all the containers are there :
 ## To Go Further - Step 6 : Create another more up-to-date template file
 nginx-new.yml
 ```
-apiVersion: v2
+apiVersion: v1
 kind: ReplicationController
 metadata:
   name: nginx
