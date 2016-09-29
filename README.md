@@ -140,7 +140,7 @@ Kubernetes would simply replace the containers one by one, until they all are in
 
 Here, we want to replace the `nginx-old` with the latest version.
 
-`sudo kubectl rolling update nginx-old --image=nginx:latest`
+`sudo kubectl rolling-update nginx-old --image=nginx:latest`
 
 After a few minutes, the update should be successful.
 
