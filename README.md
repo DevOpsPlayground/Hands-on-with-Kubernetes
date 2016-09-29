@@ -115,7 +115,7 @@ Once again if we want to curl it, we need to
 
 `sudo kubectl get pods`
 
-`sudo kubectl get svc`
+`sudo kubectl describe pod nginx-latest-x`
 
 `curl -I <IP>`
 
