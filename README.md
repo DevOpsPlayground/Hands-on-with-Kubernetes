@@ -151,46 +151,69 @@ Now, to confirm it, if you try to curl again the "load balancer" you should get 
 If you can see the nginx version as 1.11.4, it was successful.
 One thing to understand is that Kubernetes maintained the load balancer alive even after the upgrade.
 
-## Step 3: Create a Nginx *pod* template file and run a container from it
-nginx-pod.yml:
+## To go Further - Step 5 : Create a  Nginx  template file and run a containers from it
+nginx-old.yml:
 ```
 apiVersion: v1
-kind: Pod
+kind: ReplicationController
 metadata:
- name: nginx-web
- labels:
-   app: nginx-web
+  name: nginx
 spec:
- containers:
-   - name: nginx-web
-     image: nginx
+  replicas: 3
+  selector:
+    app: nginx
+  template:
+    metadata:
+      name: nginx
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.10
+        ports:
+        - containerPort: 80
 ```
-`sudo kubectl create -f nginx-pod.yml`
 
-`sudo kubectl run nginx-web --image=nginx`
+This file sums up step 1-2, when created it will launched a 3 instances of _nginx:1.10_
+`sudo kubectl create -f nginx-old.yml`
 
-
-## Step 4: Create a Tomcat *pod* template file
-tomcat-pod.yml
-```
-apiVersion: v1
-kind: Pod
-metadata:
- name: tomcat
- labels:
-   app: tomcat-web
-spec:
- containers:
-   - name: tomcat-web
-     image: tomcat
-```
-`kubectl create -f tomcat-pod.yml`
-
-`kubectl get pods`
-
-## Step 5 : Do a Rolling Update of the whole pod
-`sudo kubectl rolling-update nginx-web tomcat-web --image=tomcat-web`
-
+let's verify all the containers are there :
 `sudo kubectl get pods`
 
+
+## To Go Further - Step 6 : Create another more up-to-date template file
+nginx-new.yml
+```
+apiVersion: v2
+kind: ReplicationController
+metadata:
+  name: nginx
+spec:
+  replicas: 3
+  selector:
+    app: nginx
+  template:
+    metadata:
+      name: nginx
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+```
+
+This time we don't want to create it, we will directly do the rolling update.
+
+`sudo kubectl rolling-update nginx -f nginx-new.yml`
+
+Using this command, we tell kubernetes to replace all nginx containers by their newest version.
+
+
+#Further Reading :
+
+[Kubernetes Kubectl documentation](http://kubernetes.io/docs/user-guide/kubectl/)
 
