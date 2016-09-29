@@ -17,8 +17,11 @@ chmod u+x kubetctl
 sudo  mv kubectl /usr/local/bin/
 ```
 
+To initialize the cluster : 
+`sudo ./kube-up.sh`
+
 ## Step 2 : Run our first container from CLI
-`kubectl run web --image=nginx`
+`kubectl run nginx-base --image=nginx`
 
 ## Step 3 : Create a  Nginx *pod* template file and run a container from it
 nginx-pod.yml:
@@ -36,7 +39,7 @@ spec:
 ```
 `kubectl create -f nginx-pod.yml`
 
-`kubectl run nginx-web --image=nginx-web`
+`kubectl run nginx-web --image=nginx`
 
 
 ## Step 4 : Scale the pod horizontally and load balance it
