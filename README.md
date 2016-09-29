@@ -12,8 +12,8 @@
 
 ## Step 1 : Installing **kubectl**
 ```
-wget https://storage.googleapis.com/kubernetes-release/release/v0.20.1/bin/linux/amd64/kubectl
-chmod u+x kubetctl
+sudo wget https://storage.googleapis.com/kubernetes-release/release/v0.20.1/bin/linux/amd64/kubectl
+sudo chmod u+x kubectl
 sudo  mv kubectl /usr/local/bin/
 ```
 
@@ -21,7 +21,7 @@ To initialize the cluster :
 `sudo ./kube-up.sh`
 
 ## Step 2 : Run our first container from CLI
-`kubectl run nginx-base --image=nginx`
+`sudo kubectl run nginx-base --image=nginx`
 
 ## Step 3 : Create a  Nginx *pod* template file and run a container from it
 nginx-pod.yml:
@@ -37,16 +37,16 @@ spec:
    - name: nginx-web
      image: nginx
 ```
-`kubectl create -f nginx-pod.yml`
+`sudo kubectl create -f nginx-pod.yml`
 
-`kubectl run nginx-web --image=nginx`
+`sudo kubectl run nginx-web --image=nginx`
 
 
 ## Step 4 : Scale the pod horizontally and load balance it
-`kubectl scale nginx-web --replicas=5`
+`sudo kubectl scale nginx-web --replicas=5`
 
 ## Step 5 : Expose the containers
-`kubectl expose nginx-web --port:80`
+`sudo kubectl expose nginx-web --port:80`
 
 `curl <LB_IP>`
 
@@ -69,8 +69,8 @@ spec:
 `kubectl get pods`
 
 ## Step 7 : Do a Rolling Update of the whole pod
-`kubectl rolling-update nginx-web tomcat-web --image=tomcat-web`
+`sudo kubectl rolling-update nginx-web tomcat-web --image=tomcat-web`
 
-`kubectl get pods`
+`sudo kubectl get pods`
 
 ## Step 8 : Stop the cluster
