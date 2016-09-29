@@ -15,8 +15,10 @@ All the work will be performed on virtual machines you will be provided. Only a 
 3. The Pem key to connect to the box
 
 ## Step 0: Accessing the AWS instance
-In your CLI, please enter: 
+Linux/Mac:
 `ssh -i devops-playground.pem admin@<IP>`
+Windows:
+Use Putty and ask for help connecting.
 
 ## Step 1 : Installing **kubectl**
 
