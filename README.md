@@ -190,16 +190,16 @@ nginx-new.yml
 apiVersion: v1
 kind: ReplicationController
 metadata:
-  name: nginx
+  name: nginx-new
 spec:
   replicas: 3
   selector:
-    app: nginx
+    app: nginx-new
   template:
     metadata:
-      name: nginx
+      name: nginx-new
       labels:
-        app: nginx
+        app: nginx-new
     spec:
       containers:
       - name: nginx
